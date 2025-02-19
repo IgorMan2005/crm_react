@@ -4,13 +4,12 @@ import { useEffect } from 'react';
 
 function Form() {
 
-    // TestItem
+    // TestItems
     const data = getTestData();
     
     useEffect(() => {
-    console.log('We get TestItem: ', data);
+      console.log('We get TestItems: ', data);
     });
-
 
     return ( 
             <form id="form" method="POST" action="">

@@ -1,15 +1,10 @@
 import { useEffect } from "react";
 import products from "../../data/products";
-import filterProductData from "../../data/filterProductData";
 
 const FormProducts = (selected) => {
     
     useEffect(() => {        
         console.log('Select product:', Object.values(selected)[0]);
-        console.dir(filterProductData);
-        console.dir(products);
-        console.log('Select product:', filterProductData[selected[0]]);
-
     })
     
 	return (

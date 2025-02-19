@@ -1,20 +1,8 @@
-const TableList = ({ students}) => {
-    
-    // Project data:
-	// bages
-	const badges = {
-		'new': 'badge-danger',
-		'inwork': 'badge-warning',
-		'complete': 'badge-success'
-	}
-    // statuses
-    const statuses = {
-        'new': 'Новая',
-        'inwork': 'В работе',
-        'complete': 'Завершена',
-    }
+import badges from "../../data/badgets";
+import statuses from "../../data/statuses";
 
-    
+const TableList = ({ students}) => {
+        
 	return (
         <>
             {students.map((student) => (
