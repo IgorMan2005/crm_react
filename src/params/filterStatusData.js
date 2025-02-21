@@ -13,7 +13,7 @@ const filterStatusData = [
             "name": "В работе",
         },
         {
-            "complete": "new",
+            "id": "complete",
             "name": "Завершенные",
         },    
 ]
