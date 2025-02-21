@@ -1,11 +1,13 @@
 import LeftPanel from "../LeftPanel";
 import useFetch from "../useFetch";
 import TableList from "../TableList";
-
+import jsonServer from "../../params/jsonServer";
+import FilterProducts from "../FilterProduct";
+import FilterStatus from "../FilterStatus";
 
 const Table = () => {
 
-	const {students, isLoading, error} = useFetch('https://amplified-rich-spice.glitch.me/students');
+	const {students, isLoading, error} = useFetch(jsonServer);
 
     return ( 
         <div className="with-nav body--dashboard">
@@ -23,24 +25,12 @@ const Table = () => {
 					<div className="row mb-3 justify-content-start">
 						{/* <!-- Col --> */}
 						<div className="col">
-							<div id="topStatusBar" className="btn-group" role="group" aria-label="...">
-								<a href="#" className="btn btn-light" data-value="all">Все</a>
-								<a href="#" className="btn btn-light" data-value="new">Новые</a>
-								<a href="#" className="btn btn-light" data-value="inwork">В работе</a>
-								<a href="#" className="btn btn-light" data-value="complete">Завершенные</a>
-							</div>
+							<FilterStatus />
 						</div>
 						{/* <!-- // Col --> */}
 						{/* <!-- Col --> */}
 						<div className="col">
-							<select className="custom-select" id="productSelect" defaultValue="all">
-								<option value="all">Все продукты</option>
-								<option value="course-html">Курс по верстке</option>
-								<option value="course-js">Курс по JavaScript</option>
-								<option value="course-vue">Курс по VUE JS</option>
-								<option value="course-php">Курс по PHP</option>
-								<option value="course-wordpress">Курс по WordPress</option>
-							</select>
+							<FilterProducts />
 						</div>
 						{/* <!-- // Col --> */}
 					</div>

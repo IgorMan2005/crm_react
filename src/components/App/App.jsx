@@ -5,12 +5,12 @@ import Nav from '../Nav';
 import Home from '../Home';
 import Table from '../Table';
 import Edit from '../Edit';
+import navLinks from "../../params/navLinks";
 
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 
 function App() {
-
 
   return (
     <Router>
@@ -19,9 +19,10 @@ function App() {
         <Nav />
 
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/table' element={<Table />} />
-          <Route path='/edit' element={<Edit />} />
+          <Route path={navLinks[0]['link']} element={<Home />} />
+          <Route path={navLinks[1]['link']} element={<Table />} />
+          <Route path={navLinks[2]['link']} element={<Table />} />
+          <Route path={`${navLinks[2]['link']}/:id`} element={<Edit />} />
         </Routes>
         
     </div>

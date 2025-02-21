@@ -1,5 +1,29 @@
-function Edit() {
+import {useParams} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
+
+import useFetch from '../useFetch';
+import jsonServer from "../../params/jsonServer";
+import FormProducts from '../FormProducts';
+import FormStatuses from '../FormStatuses';
+
+
+
+const Edit = () => {
+
+	const {id} = useParams()
+    const {students:student, isLoading, error} = useFetch(jsonServer + '/' + id);
+    const navigate = useNavigate()
+	console.log('Current id:', id);
+	console.log('Student:', student);
+
     return ( 
+		<>
+
+		{isLoading && <div>Loading...</div>}
+		{error && <div>{error}</div>}
+
+		{student && (
+
         <div className="with-nav">
         {/* <!-- main-wrapper --> */}
 		<div className="form-wrapper">
@@ -7,7 +31,7 @@ function Edit() {
 				{/* <!-- row --> */}
 				<div className="row justify-content-between align-items-center">
 					<div className="col">
-						<div className="admin-heading-1">Работа с заявкой</div>
+						<div className="admin-heading-1">Работа с заявкой N: {id}</div>
 					</div>
 					<div className="col text-right">
 						<a href="index.html" className="btn btn-link">Вернуться назад</a>
@@ -27,7 +51,7 @@ function Edit() {
 										<div className="col-md-2">
 											<strong>ID:</strong>
 										</div>
-										<div className="col">Заявка №<span id="number">1</span></div>
+										<div className="col">Заявка №<span id="number">{id}</span></div>
 										<input name="id" type="hidden" id="id" />
 									</div>
 
@@ -35,7 +59,7 @@ function Edit() {
 										<div className="col-md-2">
 											<strong>Дата создания:</strong>
 										</div>
-										<div className="col" id="date">2020-04-20 13:52:13</div>
+										<div className="col" id="date">{student.date}</div>
 									</div>
 
 									<div className="row mb-3">
@@ -43,17 +67,7 @@ function Edit() {
 											<strong>Продукт:</strong>
 										</div>
 										<div className="col">
-											<select id="product" name="product" className="custom-select" >
-												<option value="course-html">Курс по верстке</option>
-												<option value="course-js">
-													Курс по JavaScript
-												</option>
-												<option value="course-vue">Курс по VUE JS</option>
-												<option value="course-php">Курс по PHP</option>
-												<option value="course-wordpress">
-													Курс по WordPress
-												</option>
-											</select>
+											<FormProducts select={student.product}	/>
 										</div>
 									</div>
 
@@ -65,7 +79,7 @@ function Edit() {
 											<input
 												type="text"
 												className="form-control"
-												value="Петр Сергеевич"
+												value={student.name}
 												id="name"
 												name="name"
 											/>
@@ -80,7 +94,7 @@ function Edit() {
 											<input
 												type="text"
 												className="form-control"
-												value="info@inbox.ru"
+												value={student.email}
 												id="email"
 												name="email"
 												/>
@@ -95,7 +109,7 @@ function Edit() {
 											<input
 												type="text"
 												className="form-control"
-												value="+7 (903) 555-77-55"
+												value={student.phone}
 												id="phone"
 												name="phone"
 												/>
@@ -107,12 +121,7 @@ function Edit() {
 											<strong>Статус заявки:</strong>
 										</div>
 										<div className="col">
-											<select className="custom-select" id="status" name="status">
-												<option selected="">Выберите...</option>
-												<option value="new">Новая</option>
-												<option value="inwork">В работе</option>
-												<option value="complete">Завершена</option>
-											</select>
+											<FormStatuses select={student.status}	/>
 										</div>
 									</div>
 								</div>
@@ -132,6 +141,12 @@ function Edit() {
 		</div>
 		{/* <!-- // main-wrapper --> */}
         </div>
+
+
+		 )}
+
+
+		</>
      );
 }
 

@@ -1,15 +1,14 @@
 import { useEffect } from "react";
-import products from "../../data/products";
-import filterProductData from "../../data/filterProductData";
+import products from "../../params/products";
 
 const FormProducts = (selected) => {
     
+    // Как Преобразовать Объект в Массив (JS)
+    // https://only-to-top.ru/blog/coding/2019-11-23-object-to-array.html    
+    
     useEffect(() => {        
-        console.log('Select product:', Object.values(selected)[0]);
-        console.dir(filterProductData);
         console.dir(products);
-        console.log('Select product:', filterProductData[selected[0]]);
-
+        console.log('Select product:', Object.values(selected)[0]);
     })
     
 	return (

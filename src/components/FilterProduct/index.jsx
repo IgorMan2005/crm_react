@@ -1,12 +1,14 @@
-import filterProductData from "../../data/filterProductData";
+import filterProductData from "../../params/filterProductData";
 
-function FilterProducts() {
-    return ( 
-        <div id="topStatusBar" className="btn-group" role="group">
-                filterProductData.map((filterData) => {
-                    <a href="#" className="btn btn-light" data-value={`badge badge-pill ${filterData.key}`}>{filterData}</a>
-                });
-        </div>
+const FilterProducts = () => {
+
+    return (         
+        
+        <select className="custom-select" id="productSelect" defaultValue={Object.values(filterProductData)[0]}>
+            {filterProductData.map((product) => (                  
+                <option key={product.id} value={product.id}>{product.name}</option>                
+            ))}
+        </select>
      );
 }
 

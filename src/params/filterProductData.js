@@ -1,10 +1,14 @@
-    // products
-    const products = [
+// filterProductsData
+const filterProductData = [
+        {
+            "id": "all",
+            "name": "Все продукты",
+        },
         {
             "id": "course-html",
             "name": "Курс по верстке",
         },
-                {
+        {
             "id": "course-js",
             "name": "Курс по JavaScript",
         },
@@ -19,9 +23,8 @@
         {
             "id": "course-wordpress",
             "name": "Курс по WordPress",
-        },
-        
-    ]
-    export default products;
-
+        },        
     
+]
+
+export default filterProductData;
