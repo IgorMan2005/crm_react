@@ -1,18 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import products from "../../params/products";
 
 const FormProducts = (selected) => {
-    
-    // Как Преобразовать Объект в Массив (JS)
-    // https://only-to-top.ru/blog/coding/2019-11-23-object-to-array.html    
-    
+       
+    // state
+    const[product, setProduct] = useState(Object.values(selected)[0]);
+    //const product = Object.values(selected)[0];
+
+    // useEffect
     useEffect(() => {        
-        console.dir(products);
-        console.log('Select product:', Object.values(selected)[0]);
+        console.log('Select product:', product);
+        setProduct(product);
     })
-    
+
 	return (
-        <select id="product" name="product" className="form-control" defaultValue={Object.values(selected)[0]}>
+        <select id="product" name="product" className="form-control" 
+        value={product} 
+        onChange={(e) => setProduct(e.target.value)}>
             {products.map((product) => (                  
                 <option key={product.id} value={product.id}>{product.name}</option>                
             ))}

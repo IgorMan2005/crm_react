@@ -1,13 +1,13 @@
 import './bootstrap.min.css';
 import './style.css';
 
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+
 import Nav from '../Nav';
 import Home from '../Home';
 import Table from '../Table';
 import Edit from '../Edit';
 import navLinks from "../../params/navLinks";
-
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 
 function App() {

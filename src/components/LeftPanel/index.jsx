@@ -1,6 +1,6 @@
 import User from "../User";
 
-function LeftPanel() {
+function LeftPanel(count) {
     return ( 
         <div className="left-panel blue-skin">
 			{/* <!-- Logo --> */}
@@ -17,7 +17,10 @@ function LeftPanel() {
 				<div className="left-panel__navigation-title">Заявки</div>
 				<ul>
 					<li><a data-value="all" data-role="left-status" href="#" className="active">Все вместе</a></li>
-					<li><a data-value="new" data-role="left-status" href="#" >Новые<div className="badge" id="badge-new">12</div></a></li>
+					<li><a data-value="new" data-role="left-status" href="#" >
+						Новые
+						<div className="badge" id="badge-new">12</div></a>
+					</li>
 					<li><a data-value="inwork" data-role="left-status" href="#">В работе</a></li>
 					<li><a data-value="complete" data-role="left-status" href="#">Завершенные</a></li>
 				</ul>

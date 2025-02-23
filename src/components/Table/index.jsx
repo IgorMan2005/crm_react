@@ -4,10 +4,18 @@ import TableList from "../TableList";
 import jsonServer from "../../params/jsonServer";
 import FilterProducts from "../FilterProduct";
 import FilterStatus from "../FilterStatus";
+import countNew from "../../utils/countNew";
+import { useState } from "react";
 
 const Table = () => {
 
 	const {students, isLoading, error} = useFetch(jsonServer);
+	console.log('students:', students);
+
+	// const [count, setCount] = useState(0);
+	// setCount(countNew(students));
+
+	//if (students !== null) countNew(students);
 
     return ( 
         <div className="with-nav body--dashboard">
