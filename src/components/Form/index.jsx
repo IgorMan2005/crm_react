@@ -1,9 +1,13 @@
+import { useEffect, useState } from 'react';
+import {useNavigate} from 'react-router-dom'
+
 import getTestData from './../../utils/TestItem';
 import FormProducts from '../FormProducts';
-import { useEffect, useState } from 'react';
+
 import jsonServer from '../../params/jsonServer';
 import getLastID from '../../utils/getLastID';
 import useFetch from '../useFetch';
+import navLinks from '../../params/navLinks';
 
 function Form() {
 
@@ -12,15 +16,21 @@ function Form() {
     // DB from jsonServer
     const {students, isLoading, error} = useFetch(jsonServer);
     
-    useEffect(() => {
-      console.log('We get TestItems: ', data);
-    });
+    // useEffect(() => {
+    //   console.log('We get TestItems: ', data);
+    //   console.log('Students from jsonServer: ', students);
+    // });
 
     // state
     const [name, setName] = useState(data.name);
     const [phone, setPhone] = useState(data.phone);
     const [email, setEmail] = useState(data.email);
     const [product, setProduct] = useState(data.product);
+
+    const [isPending, setIsPending] = useState(false);
+    const navigate = useNavigate();
+    console.log('navLinks:', navLinks);
+  
 
     // submit (!)
     const handleSubmit = (e) => {
@@ -32,11 +42,15 @@ function Form() {
       const student = {id, date, product, name, email, phone, status}
       console.log('Submit form:', student);
 
-      // fetch(jsonServer, {
-      //   method: "POST",
-      //   headers: {"Content-type":"application/json"},
-      //   body: JSON.stringify(student)
-      // })
+      fetch(jsonServer, {
+        method: "POST",
+        headers: {"Content-type":"application/json"},
+        body: JSON.stringify(student)
+      }).then(() => {
+              console.log('New student was added!');
+              setIsPending(false);
+              navigate(navLinks[1]['link']);     // to result table
+          })
 
     }
 
