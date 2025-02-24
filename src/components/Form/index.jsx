@@ -21,7 +21,7 @@ function Form() {
     //   console.log('Students from jsonServer: ', students);
     // });
 
-    // state
+    // form state
     const [name, setName] = useState(data.name);
     const [phone, setPhone] = useState(data.phone);
     const [email, setEmail] = useState(data.email);
@@ -42,6 +42,7 @@ function Form() {
       const student = {id, date, product, name, email, phone, status}
       console.log('Submit form:', student);
 
+      // Add student (!)
       fetch(jsonServer, {
         method: "POST",
         headers: {"Content-type":"application/json"},
@@ -51,7 +52,6 @@ function Form() {
               setIsPending(false);
               navigate(navLinks[1]['link']);     // to result table
           })
-
     }
 
     return ( 

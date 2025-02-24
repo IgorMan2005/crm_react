@@ -1,5 +1,5 @@
-import {useParams} from 'react-router-dom'
-import {useNavigate} from 'react-router-dom'
+import {useParams, useNavigate} from 'react-router-dom'
+import { useEffect, useState } from 'react';
 
 import useFetch from '../useFetch';
 import jsonServer from "../../params/jsonServer";
@@ -12,10 +12,50 @@ const Edit = () => {
 
 	const {id} = useParams()
     const {students:student, isLoading, error} = useFetch(jsonServer + '/' + id);
-    const navigate = useNavigate()
-	console.log('Current id:', id);
-	console.log('Student:', student);
+	
+    const navigate = useNavigate();
 
+	// form state
+	const [name, setName] = useState();
+	const [phone, setPhone] = useState();
+	const [email, setEmail] = useState();
+	const [product, setProduct] = useState();
+	const [status, setStatus] = useState();
+
+	// useEffect
+    useEffect(() => {        
+		if(student !== null) {
+        console.log('Current id:', id);
+		console.log('student:', student);
+
+		// 	// form data:
+		setName(student.name);
+		
+		}
+    }, [name]);
+
+   
+	// if(student !== null) {
+	// 	// form data:
+	// 	setName(student.name);
+	// 	setPhone(student.phone);
+	// 	setEmail(student.email);
+	// 	setProduct(student.product);
+	// 	setStatus(student.status);
+	// }
+
+
+	// submit (!)
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      const date = new Date().toISOString();      
+      const student = {id, date, product, name, email, phone, status}
+      console.log('Submit form:', student);
+	}
+
+
+	
+	
     return ( 
 		<>
 
@@ -42,7 +82,7 @@ const Edit = () => {
 				<div className="row">
 					{/* <!-- col --> */}
 					<div className="col">
-						<form id="form">
+						<form id="form" onSubmit={handleSubmit}>
 							{/* <!-- card --> */}
 							<div className="card mb-4">
 								<div className="card-header">Данные о заявке</div>
@@ -76,10 +116,12 @@ const Edit = () => {
 											<strong>Имя:</strong>
 										</div>
 										<div className="col">
+											{student.name}
 											<input
 												type="text"
 												className="form-control"
-												value={student.name}
+												value={student.name} onChange={(e) => {setName(e.target.value)}}
+												
 												id="name"
 												name="name"
 											/>

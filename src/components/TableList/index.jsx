@@ -5,6 +5,7 @@ import badges from "../../params/badgets";
 import statuses from "../../params/statuses";
 import products from "../../params/products";
 import getArrayData from "../../utils/getArrayData";
+import Edit from "../Edit";
 
 const TableList = ({ students}) => {
 
@@ -28,7 +29,7 @@ const TableList = ({ students}) => {
                         </div>
                     </td>
                     <td>
-                        <Link to={`${navLinks[2]['link']}/${student.id}`}>                        
+                        <Link to={`${navLinks[2]['link']}/${student.id}`}>                                                
                             Редактировать
                         </Link>
                     </td>
