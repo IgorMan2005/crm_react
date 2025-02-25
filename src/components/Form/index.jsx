@@ -2,12 +2,17 @@ import { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom'
 
 import getTestData from './../../utils/TestItem';
-import FormProducts from '../FormProducts';
 
 import jsonServer from '../../params/jsonServer';
 import getLastID from '../../utils/getLastID';
 import useFetch from '../useFetch';
 import navLinks from '../../params/navLinks';
+
+// V.1
+//import FormProducts from '../FormProducts';
+// V.2
+import products from "../../params/products";
+
 
 function Form() {
 
@@ -75,7 +80,18 @@ function Form() {
               </div>
               <div className="form-group">
                 <label htmlFor="exampleFormControlSelect1">Продукт:</label>
-                {<FormProducts selected={product} />}
+                {/* V.1 */}
+                {/* {<FormProducts selected={product} />} */}
+
+                {/* V.2 */}
+                <select id="product" name="product" className="form-control" 
+                value={product} 
+                onChange={(e) => setProduct(e.target.value)}>
+                    {products.map((product) => (                  
+                        <option key={product.id} value={product.id}>{product.name}</option>                
+                    ))}
+                </select>
+    
               </div>
               <div className="form-group">
                 <button type="submit" className="btn btn-lg btn-primary btn-block">Оформить заявку</button>

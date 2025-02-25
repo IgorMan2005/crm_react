@@ -15,7 +15,7 @@ const TableList = ({ students}) => {
 
                 <tr key={student.id}>
                     <th scope="row">{student.id}</th>
-                    <td>{student.date}</td>
+                    <td>{student.date.toString()}</td>
                     <td>                        
                         { getArrayData(products, student.product) }
                     </td>
