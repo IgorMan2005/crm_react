@@ -38,6 +38,7 @@ function Form() {
       const date = new Date().toISOString();
       const status = 'new';
   
+      // Get Last ID + 1
       const id = getLastID(students);
       const student = {id, date, product, name, email, phone, status}
       console.log('Submit form:', student);

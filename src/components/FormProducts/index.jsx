@@ -9,7 +9,7 @@ const FormProducts = (selected) => {
 
     // useEffect
     useEffect(() => {        
-        console.log('Select product:', product);
+        //console.log('Select product:', product);
         setProduct(product);
     })
 

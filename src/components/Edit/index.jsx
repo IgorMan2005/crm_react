@@ -1,48 +1,72 @@
 import {useParams, useNavigate} from 'react-router-dom'
 import { useEffect, useState } from 'react';
 
-import useFetch from '../useFetch';
 import jsonServer from "../../params/jsonServer";
 import FormProducts from '../FormProducts';
-import FormStatuses from '../FormStatuses';
+import navLinks from '../../params/navLinks';
 
+// V.1
+//import FormStatuses from '../FormStatuses';
+// V.2
+import statuses from "../../params/statuses";
 
 
 const Edit = () => {
 
+	// id
 	const {id} = useParams()
-    const {students:student, isLoading, error} = useFetch(jsonServer + '/' + id);
-	
-    const navigate = useNavigate();
 
+	// target jsonServer
+	const targetJsonServer = jsonServer + '/' + id;
+
+	//const {student, isLoading, error} = useFetch(jsonServer + '/' + id);
+	
 	// form state
-	const [name, setName] = useState();
-	const [phone, setPhone] = useState();
-	const [email, setEmail] = useState();
-	const [product, setProduct] = useState();
-	const [status, setStatus] = useState();
+	const [name, setName] = useState(null);
+	const [phone, setPhone] = useState(null);
+	const [email, setEmail] = useState(null);
+	const [product, setProduct] = useState(null);
+	const [status, setStatus] = useState(null);
+
+	// Student state
+	const [student, setStudent] = useState(null);
+	// loading state
+	const [isLoading, setLoading] = useState(true);
+	// Error state
+	const [error, setError]= useState(null);
+	
+	const [isPending, setIsPending] = useState(false);
+    const navigate = useNavigate();
 
 	// useEffect
     useEffect(() => {        
-		if(student !== null) {
-        console.log('Current id:', id);
-		console.log('student:', student);
-
-		// 	// form data:
-		setName(student.name);
 		
-		}
-    }, [name]);
+        console.log('Current id:', id);
 
-   
-	// if(student !== null) {
-	// 	// form data:
-	// 	setName(student.name);
-	// 	setPhone(student.phone);
-	// 	setEmail(student.email);
-	// 	setProduct(student.product);
-	// 	setStatus(student.status);
-	// }
+	    fetch(targetJsonServer).then( (res) => {
+			console.log('Status: ', res.status);
+			if (res.ok !== true){
+                throw Error('Не могу получить данные с jsonServer!');
+            }
+			return res.json();
+
+		}).then( (student) => {
+			console.log('student:', student);
+			setStudent(student);
+			setLoading(false);
+
+			setName(student.name);
+			setPhone(student.phone);
+			setEmail(student.email);
+			setProduct(student.product);
+			setStatus(student.status);
+
+		}).catch((err) => {			
+				setError('Внимание! Ошибка:', err.message);                
+                setLoading(false);
+		})		
+    
+	}, []);		// useEffect сработает один раз
 
 
 	// submit (!)
@@ -51,16 +75,34 @@ const Edit = () => {
       const date = new Date().toISOString();      
       const student = {id, date, product, name, email, phone, status}
       console.log('Submit form:', student);
+
+	  // Edit student (!)
+      fetch(targetJsonServer, 
+		{
+        method: "PUT",
+        headers: {"Content-type":"application/json"},
+        body: JSON.stringify(student)
+      	}).then((res) => {
+
+				console.log('Status: ', res.status);
+				if (res.ok !== true){
+					throw Error('Не могу получить данные с jsonServer!');
+				}
+				return res.json();
+			
+		}).then((student) => {
+			console.log('Record student was changed:', student);
+			setIsPending(false);
+			navigate(navLinks[1]['link']);     // to result table
+		});    
 	}
-
-
 	
 	
     return ( 
 		<>
 
 		{isLoading && <div>Loading...</div>}
-		{error && <div>{error}</div>}
+		{error && <div>{error}</div>} 
 
 		{student && (
 
@@ -74,7 +116,7 @@ const Edit = () => {
 						<div className="admin-heading-1">Работа с заявкой N: {id}</div>
 					</div>
 					<div className="col text-right">
-						<a href="index.html" className="btn btn-link">Вернуться назад</a>
+						<a href="" className="btn btn-link">Вернуться назад</a>
 					</div>
 				</div>
 				{/* <!-- // row --> */}
@@ -115,13 +157,11 @@ const Edit = () => {
 										<div className="col-md-2">
 											<strong>Имя:</strong>
 										</div>
-										<div className="col">
-											{student.name}
+										<div className="col">											
 											<input
 												type="text"
 												className="form-control"
-												value={student.name} onChange={(e) => {setName(e.target.value)}}
-												
+												value={name} onChange={(e) => {setName(e.target.value)}}												
 												id="name"
 												name="name"
 											/>
@@ -136,7 +176,7 @@ const Edit = () => {
 											<input
 												type="text"
 												className="form-control"
-												value={student.email}
+												value={email} onChange={(e) => {setEmail(e.target.value)}}
 												id="email"
 												name="email"
 												/>
@@ -151,7 +191,7 @@ const Edit = () => {
 											<input
 												type="text"
 												className="form-control"
-												value={student.phone}
+												value={phone} onChange={(e) => {setPhone(e.target.value)}}
 												id="phone"
 												name="phone"
 												/>
@@ -163,7 +203,18 @@ const Edit = () => {
 											<strong>Статус заявки:</strong>
 										</div>
 										<div className="col">
-											<FormStatuses select={student.status}	/>
+											{/* V.1 */}
+											{/* <FormStatuses select={student.status} /> */}
+
+											{/* V.2 */}
+											<select className="custom-select" id="status" name="status" 
+												defaultValue={student.status} 
+												onChange={(e) => {setStatus(e.target.value)}}
+												>
+													{statuses.map((status) => (                  
+														<option key={status.id} value={status.id}>{status.name}</option>                
+													))}
+											</select>      
 										</div>
 									</div>
 								</div>

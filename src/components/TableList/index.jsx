@@ -5,7 +5,6 @@ import badges from "../../params/badgets";
 import statuses from "../../params/statuses";
 import products from "../../params/products";
 import getArrayData from "../../utils/getArrayData";
-import Edit from "../Edit";
 
 const TableList = ({ students}) => {
 
