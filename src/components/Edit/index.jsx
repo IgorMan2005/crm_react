@@ -6,6 +6,8 @@ import FormProducts from '../FormProducts';
 import navLinks from '../../params/navLinks';
 //import useFetch from '../useFetch';
 
+import formatDate from '../../utils/formatDate';
+
 // V.1
 //import FormStatuses from '../FormStatuses';
 // V.2
@@ -142,7 +144,7 @@ const Edit = () => {
 										<div className="col-md-2">
 											<strong>Дата создания:</strong>
 										</div>
-										<div className="col" id="date">{student.date}</div>
+										<div className="col" id="date">{formatDate(student.date)}</div>
 									</div>
 
 									<div className="row mb-3">

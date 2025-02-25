@@ -1,7 +1,13 @@
 import getCountNew from "../../utils/getCountNew";
 import filterStatusData from "../../params/filterStatusData";
+// import { useEffect } from "react";
 
 const LeftNavigation = (props) => {
+
+    // useEffect(() => {
+    //     console.log('LeftNavigation props:', props);
+    // });
+
     return ( 
             <ul>
             {filterStatusData.map((status) => (      

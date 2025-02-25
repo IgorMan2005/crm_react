@@ -17,7 +17,7 @@ const LeftPanel = (props) => {
 			{/* <!-- Navigation 1 --> */}
 			<div className="left-panel__navigation">
 				<div className="left-panel__navigation-title">Заявки</div>
-				<LeftNavigation setStatus={props.setStatus} students={props.students} />
+				<LeftNavigation status={props.status} setStatus={props.setStatus} students={props.students} />
 			</div>
 			{/* <!-- // Navigation 1 --> */}
 
