@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import jsonServer from "../../params/jsonServer";
 import FormProducts from '../FormProducts';
 import navLinks from '../../params/navLinks';
-import useFetch from '../useFetch';
+//import useFetch from '../useFetch';
 
 // V.1
 //import FormStatuses from '../FormStatuses';
@@ -115,7 +115,9 @@ const Edit = () => {
 						<div className="admin-heading-1">Работа с заявкой N: {id}</div>
 					</div>
 					<div className="col text-right">
-						<a href="" className="btn btn-link">Вернуться назад</a>
+						<a href="#"
+						onClick={() => navigate(navLinks[1]['link'])} 
+						className="btn btn-link">Вернуться назад</a>
 					</div>
 				</div>
 				{/* <!-- // row --> */}

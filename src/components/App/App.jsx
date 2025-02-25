@@ -9,7 +9,12 @@ import Table from '../Table';
 import Edit from '../Edit';
 import navLinks from "../../params/navLinks";
 
+import { useState } from 'react';
+
+
 function App() {
+
+  const [students, setStudents] = useState(null)
 
   return (
     <Router>
