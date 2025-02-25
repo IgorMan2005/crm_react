@@ -9,7 +9,6 @@ import Table from '../Table';
 import Edit from '../Edit';
 import navLinks from "../../params/navLinks";
 
-
 function App() {
 
   return (

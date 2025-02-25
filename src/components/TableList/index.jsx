@@ -5,20 +5,16 @@ import badges from "../../params/badgets";
 import statuses from "../../params/statuses";
 import products from "../../params/products";
 import getArrayData from "../../utils/getArrayData";
-import { useEffect } from "react";
 
-const TableList = ({ students, status}) => {
-
-useEffect(() => {
-    console.log('Filter status in TableList:', status);
-})
-
+const TableList = ({ students, status, product}) => {
     
 	return (
         <>
             {students.map(student => (                
 
-                status === student.status || status === 'all'
+                (status === student.status || status === 'all' ) 
+                && 
+                (product === student.product || product === 'all')
                 ?
                 <tr key={student.id} >
                     <th scope="row">{student.id}</th>

@@ -1,9 +1,11 @@
 import {useState, useEffect} from 'react'
+import getCountNew from '../../utils/getCountNew'
 
 const useFetch = (url) => {
     const [students, setStudents] = useState(null)
     const [isLoading, setLoading] = useState(true)
     const [error, setError]= useState(null);
+    const [countNew, setCountNew]= useState(null);
 
     useEffect(()=>{
         
@@ -17,9 +19,11 @@ const useFetch = (url) => {
             }
             return res.json()
         }).then((students) => {            
-            setStudents(students)
-            setLoading(false)
-            setError(null)
+            setStudents(students);
+            setLoading(false);
+            setError(null);
+            setCountNew(getCountNew(students));
+
         }).catch((err)=>{
             // AbortError
             if (err.name === "AbortError"){
@@ -37,7 +41,7 @@ const useFetch = (url) => {
         }
     }, [])
 
-    return {students, isLoading, error}
+    return {students, isLoading, error, countNew}
 }
 
 export default useFetch;

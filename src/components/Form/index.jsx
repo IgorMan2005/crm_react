@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {useNavigate} from 'react-router-dom'
 
 import getTestData from './../../utils/TestItem';
@@ -13,18 +13,12 @@ import navLinks from '../../params/navLinks';
 // V.2
 import products from "../../params/products";
 
-
 function Form() {
 
     // TestItems
     const data = getTestData();
     // DB from jsonServer
     const {students, isLoading, error} = useFetch(jsonServer);
-    
-    // useEffect(() => {
-    //   console.log('We get TestItems: ', data);
-    //   console.log('Students from jsonServer: ', students);
-    // });
 
     // form state
     const [name, setName] = useState(data.name);
@@ -34,8 +28,6 @@ function Form() {
 
     const [isPending, setIsPending] = useState(false);
     const navigate = useNavigate();
-    console.log('navLinks:', navLinks);
-  
 
     // submit (!)
     const handleSubmit = (e) => {

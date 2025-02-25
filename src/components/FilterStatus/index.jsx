@@ -1,13 +1,6 @@
-import { useEffect } from "react";
 import filterStatusData from "../../params/filterStatusData";
 
 const FilterStatus = (props) => {
-    
-    useEffect(() => {        
-        console.log('Filter status:' , props.status);           
-        console.log('setStatus type:', typeof(props.setStatus));       
-    }, []);
-    
     
 	return (
         

@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import LeftPanel from "../LeftPanel";
 import useFetch from "../useFetch";
 import TableList from "../TableList";
@@ -5,25 +7,25 @@ import jsonServer from "../../params/jsonServer";
 import FilterProducts from "../FilterProduct";
 
 import filterStatusData from "../../params/filterStatusData";
+import filterProductData from "../../params/filterProductData";
 import FilterStatus from "../FilterStatus";
 
-import countNew from "../../utils/countNew";
-import { useEffect, useState } from "react";
 
 const Table = () => {
 
-	const {students, isLoading, error} = useFetch(jsonServer);
-
-	// all records
+	// get info from jsonServer
+	const {students, isLoading, error, countNew} = useFetch(jsonServer);
+	
+	// status by default - all records
 	const [status, setStatus] = useState(filterStatusData[0]['id']);
-	useEffect(() => {
-		console.log('setStatus type:', typeof(setStatus));
-	}, [status])
+	// product by default - all products
+	const [product, setProduct] = useState(filterProductData[0]['id']);
 
     return ( 
         <div className="with-nav body--dashboard">
         {/* <!-- left-panel --> */}
-		<LeftPanel status={status} setStatus={setStatus} />
+		{ students && <LeftPanel status={status} setStatus={setStatus} students={students} /> }
+		
 		{/* <!-- // left-panel --> */}
 
 		{/* <!-- main-wrapper --> */}
@@ -39,9 +41,10 @@ const Table = () => {
 							<FilterStatus status={status} setStatus={setStatus} />
 						</div>
 						{/* <!-- // Col --> */}
+
 						{/* <!-- Col --> */}
 						<div className="col">
-							<FilterProducts />
+							<FilterProducts product={product} setProduct={setProduct} />
 						</div>
 						{/* <!-- // Col --> */}
 					</div>
@@ -64,7 +67,7 @@ const Table = () => {
 
 							{ error && <div>{error}</div>}
 							{ isLoading && <tr><td><h3>Loading...</h3></td></tr>}
-							{ students && <TableList students={students} status={status} /> }
+							{ students && <TableList students={students} status={status} product={product} /> }
 						
 					</tbody>
 				</table>
