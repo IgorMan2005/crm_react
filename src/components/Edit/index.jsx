@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react';
 import jsonServer from "../../params/jsonServer";
 import FormProducts from '../FormProducts';
 import navLinks from '../../params/navLinks';
+import useFetch from '../useFetch';
 
 // V.1
 //import FormStatuses from '../FormStatuses';
 // V.2
 import statuses from "../../params/statuses";
-
 
 const Edit = () => {
 
@@ -18,8 +18,6 @@ const Edit = () => {
 
 	// target jsonServer
 	const targetJsonServer = jsonServer + '/' + id;
-
-	//const {student, isLoading, error} = useFetch(jsonServer + '/' + id);
 	
 	// form state
 	const [name, setName] = useState(null);
@@ -28,6 +26,7 @@ const Edit = () => {
 	const [product, setProduct] = useState(null);
 	const [status, setStatus] = useState(null);
 
+	//const {student, isLoading, error} = useFetch(targetJsonServer);
 	// Student state
 	const [student, setStudent] = useState(null);
 	// loading state

@@ -5,17 +5,24 @@ import badges from "../../params/badgets";
 import statuses from "../../params/statuses";
 import products from "../../params/products";
 import getArrayData from "../../utils/getArrayData";
+import { useEffect } from "react";
 
-const TableList = ({ students}) => {
+const TableList = ({ students, status}) => {
+
+useEffect(() => {
+    console.log('Filter status in TableList:', status);
+})
 
     
 	return (
         <>
-            {students.map((student) => (                
+            {students.map(student => (                
 
-                <tr key={student.id}>
+                status === student.status || status === 'all'
+                ?
+                <tr key={student.id} >
                     <th scope="row">{student.id}</th>
-                    <td>{student.date.toString()}</td>
+                    <td>{student.date}</td>
                     <td>                        
                         { getArrayData(products, student.product) }
                     </td>
@@ -33,6 +40,9 @@ const TableList = ({ students}) => {
                         </Link>
                     </td>
                 </tr>
+                :
+                null
+
                 ))}
 
         </>

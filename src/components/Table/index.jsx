@@ -3,24 +3,27 @@ import useFetch from "../useFetch";
 import TableList from "../TableList";
 import jsonServer from "../../params/jsonServer";
 import FilterProducts from "../FilterProduct";
+
+import filterStatusData from "../../params/filterStatusData";
 import FilterStatus from "../FilterStatus";
+
 import countNew from "../../utils/countNew";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Table = () => {
 
 	const {students, isLoading, error} = useFetch(jsonServer);
-	console.log('students:', students);
 
-	// const [count, setCount] = useState(0);
-	// setCount(countNew(students));
-
-	//if (students !== null) countNew(students);
+	// all records
+	const [status, setStatus] = useState(filterStatusData[0]['id']);
+	useEffect(() => {
+		console.log('setStatus type:', typeof(setStatus));
+	}, [status])
 
     return ( 
         <div className="with-nav body--dashboard">
         {/* <!-- left-panel --> */}
-		<LeftPanel />
+		<LeftPanel status={status} setStatus={setStatus} />
 		{/* <!-- // left-panel --> */}
 
 		{/* <!-- main-wrapper --> */}
@@ -33,7 +36,7 @@ const Table = () => {
 					<div className="row mb-3 justify-content-start">
 						{/* <!-- Col --> */}
 						<div className="col">
-							<FilterStatus />
+							<FilterStatus status={status} setStatus={setStatus} />
 						</div>
 						{/* <!-- // Col --> */}
 						{/* <!-- Col --> */}
@@ -61,7 +64,7 @@ const Table = () => {
 
 							{ error && <div>{error}</div>}
 							{ isLoading && <tr><td><h3>Loading...</h3></td></tr>}
-							{ students && <TableList students={students} /> }
+							{ students && <TableList students={students} status={status} /> }
 						
 					</tbody>
 				</table>

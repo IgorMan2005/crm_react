@@ -1,16 +1,22 @@
+import { useEffect } from "react";
 import User from "../User";
+import Logo from "../Logo";
 
-function LeftPanel(count) {
+const LeftPanel = (props) => {
+
+	useEffect(() => {        
+			console.log('LeftPanel status:' , props.status);           
+			console.log('LeftPanel type:', typeof(props.setStatus));       
+		}, []);
+
     return ( 
         <div className="left-panel blue-skin">
 			{/* <!-- Logo --> */}
-			<div className="left-panel__logo">
-				<div className="left-panel__logo-title">CRM заявки</div>
-				<div className="left-panel__logo-subtitle">учебный проект webcademy</div>
-			</div>
+				<Logo />
 			{/* <!-- // Logo --> */}
+			
 			{/* <!-- User --> */}
-			<User />
+				<User />
 			{/* <!-- // User --> */}
 			{/* <!-- Navigation 1 --> */}
 			<div className="left-panel__navigation">

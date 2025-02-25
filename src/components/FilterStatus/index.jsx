@@ -1,13 +1,21 @@
+import { useEffect } from "react";
 import filterStatusData from "../../params/filterStatusData";
 
-const FilterStatus = () => {
-        
+const FilterStatus = (props) => {
+    
+    useEffect(() => {        
+        console.log('Filter status:' , props.status);           
+        console.log('setStatus type:', typeof(props.setStatus));       
+    }, []);
+    
+    
 	return (
         
         <div id="topStatusBar" className="btn-group" role="group">
-            {filterStatusData.map((status) => (
-                // console.log("status.id", status.id)                
-                <a key={status.id} href="#" className="btn btn-light" data-value={status.id}>{status.name}</a>                
+            {filterStatusData.map((status) => (      
+                <a key={status.id} href="#" onClick={() => props.setStatus(status.id)}
+                className={"btn btn-light " + (props.status === status.id ? 'active' : '')}                
+                data-value={status.id}>{status.name}</a>                
             ))}        
         </div>
     
