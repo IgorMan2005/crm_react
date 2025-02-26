@@ -2,10 +2,10 @@ import './bootstrap.min.css';
 import './style.css';
 
 // BrowserRouter for Browser:
-// import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 // HashRouter for  GitHub Pages:
-import {HashRouter as Router, Routes, Route} from 'react-router-dom';
+// import {HashRouter as Router, Routes, Route} from 'react-router-dom';
 
 import Nav from '../Nav';
 import Home from '../Home';
