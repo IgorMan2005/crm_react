@@ -6,7 +6,7 @@ const FilterStatus = (props) => {
         
         <div id="topStatusBar" className="btn-group" role="group">
             {filterStatusData.map((status) => (      
-                <a key={status.id} href="#" onClick={() => props.setStatus(status.id)}
+                <a key={status.id} onClick={() => props.setStatus(status.id)}
                 className={"btn btn-light " + (props.status === status.id ? 'active' : '')}                
                 data-value={status.id}>{status.name}</a>                
             ))}        

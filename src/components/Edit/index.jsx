@@ -39,7 +39,10 @@ const Edit = () => {
 	// Error state
 	const [error, setError]= useState(null);
 	
+	// isPending
 	const [isPending, setIsPending] = useState(false);
+	// isDeleting
+	const [isDeleting, setIsDeleting] = useState(false);
     const navigate = useNavigate();
 
 	// useEffect
@@ -77,6 +80,9 @@ const Edit = () => {
 	// submit (!)
     const handleSubmit = (e) => {
       e.preventDefault();
+
+	  // isPending start
+      setIsPending(true);
 		
 	  // при редактировании дату заявки не меняем (!)
 	  //const date = new Date().toISOString();      
@@ -100,11 +106,40 @@ const Edit = () => {
 			
 		}).then((student) => {
 			console.log('Record student was changed:', student);
-			setIsPending(false);
-			navigate(navLinks[1]['link']);     // to result table
+			// isPending finish
+            setIsPending(false);
+			 // to result table
+			navigate(navLinks[1]['link']);    
 		});    
 	}
 	
+	// delete record (!)
+	const deletePost = (id) => {
+
+	// IsDeleting start
+    setIsDeleting(true);
+    
+	fetch(targetJsonServer, 
+		{	
+        method: 'DELETE'
+    	}).then((res) => {
+
+				console.log('Status: ', res.status);
+				if (res.ok !== true){
+					throw Error('Не могу получить данные с jsonServer!');
+				}
+				return res.json();
+
+			}).then(() => {
+			console.log('Record student was deleted!');
+			// IsDeleting finish			
+            setIsDeleting(false);
+			 // to result table
+			navigate(navLinks[1]['link']);    
+    		})
+	}
+
+
 	
     return ( 
 		<>
@@ -231,11 +266,22 @@ const Edit = () => {
 							</div>
 							{/* <!-- //card --> */}
 							<div className="row justify-content-between">
-								<div className="col text-right">
-									<button type="submit" className="btn btn-primary">Сохранить изменения</button>
+								<div className="col text-right">									
+									{ isPending && <button disabled className="btn btn-primary">Изменения сохраняются...</button>}
+                					{ (!isPending && !isDeleting) && <button type="submit" className="btn btn-primary">Сохранить изменения</button>}
 								</div>
 							</div>
 						</form>
+
+							<hr />
+							<div className="row justify-content-between">
+								<div className="col text-center">															
+									{ isDeleting && <button disabled className="btn btn-danger">Данные удаляются...</button>}
+                					{ (!isDeleting && !isPending ) && <button onClick={()=>{deletePost(id)}} className="btn btn-danger">Удалить запись</button>}
+								</div>
+							</div>
+
+
 					</div>
 					{/* <!-- //col --> */}
 				</div>

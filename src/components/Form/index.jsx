@@ -34,6 +34,9 @@ function Form() {
       e.preventDefault();
       const date = new Date().toISOString();
       const status = 'new';
+
+      // isPending start
+      setIsPending(true);
   
       // Get Last ID + 1
       const id = getLastID(students);
@@ -47,6 +50,7 @@ function Form() {
         body: JSON.stringify(student)
       }).then(() => {
               console.log('New student was added!');
+              // isPending finish
               setIsPending(false);
               navigate(navLinks[1]['link']);     // to result table
           })
@@ -86,7 +90,9 @@ function Form() {
     
               </div>
               <div className="form-group">
-                <button type="submit" className="btn btn-lg btn-primary btn-block">Оформить заявку</button>
+                { isPending && <button disabled className="btn btn-lg btn-primary btn-block">Заявка отправляется...</button>}
+                { !isPending && <button type="submit" className="btn btn-lg btn-primary btn-block">Оформить заявку</button>}
+                
               </div>
             </form>
      );

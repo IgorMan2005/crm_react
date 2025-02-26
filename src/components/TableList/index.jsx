@@ -33,7 +33,7 @@ const TableList = ({ students, status, product}) => {
                         </div>
                     </td>
                     <td>
-                        <Link to={`${navLinks[2]['link']}/${student.id}`}>                                                
+                        <Link to={`${navLinks[2]['link']}/${student.id}`} className="btn btn-primary">                                                
                             Редактировать
                         </Link>
                     </td>

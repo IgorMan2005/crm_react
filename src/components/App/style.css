@@ -804,3 +804,8 @@ body {
 	overflow-x: hidden;
 	overflow-y: auto;
 }
+
+.not-found {
+	margin-top: 100px;
+	text-align: center;
+}
