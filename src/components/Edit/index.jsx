@@ -27,6 +27,9 @@ const Edit = () => {
 	const [email, setEmail] = useState(null);
 	const [product, setProduct] = useState(null);
 	const [status, setStatus] = useState(null);
+	
+	// при редактировании дату заявки не меняем (!)
+	const [date, setDate] = useState(null);
 
 	//const {student, isLoading, error} = useFetch(targetJsonServer);
 	// Student state
@@ -61,6 +64,7 @@ const Edit = () => {
 			setEmail(student.email);
 			setProduct(student.product);
 			setStatus(student.status);
+			setDate(student.date);
 
 		}).catch((err) => {			
 				setError('Внимание! Ошибка:', err.message);                
@@ -73,8 +77,11 @@ const Edit = () => {
 	// submit (!)
     const handleSubmit = (e) => {
       e.preventDefault();
-      const date = new Date().toISOString();      
-      const student = {id, date, product, name, email, phone, status}
+		
+	  // при редактировании дату заявки не меняем (!)
+	  //const date = new Date().toISOString();      
+      
+	  const student = {id, date, product, name, email, phone, status}
       console.log('Submit form:', student);
 
 	  // Edit student (!)
