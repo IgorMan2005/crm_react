@@ -111,3 +111,9 @@ Prettier в крупных проектах: тратим 20 минут на н�
 ###### Язык разметки Markdown: шпаргалка по синтаксису с примерами
 
 <https://skillbox.ru/media/code/yazyk-razmetki-markdown-shpargalka-po-sintaksisu-s-primerami/>
+
+---
+
+Отзыв CRM React.JS
+
+<https://disk.yandex.ru/i/B3KxtCwHQ4S2dA>
